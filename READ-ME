@@ -1,0 +1,168 @@
+📌 Cadastro de Funcionários – API Serverless com Clean Architecture
+📖 Descrição
+
+Este projeto consiste em uma API REST para cadastro de funcionários, desenvolvida em Node.js + TypeScript, utilizando os princípios da Clean Architecture e hospedada na AWS em infraestrutura Serverless.
+
+A aplicação permite:
+
+✅ Criar funcionário
+
+✅ Listar funcionários
+
+✅ Buscar funcionário por ID
+
+✅ Atualizar funcionário
+
+✅ Remover funcionário
+
+Os dados são persistidos em DynamoDB, e a aplicação é exposta publicamente através de API Gateway + AWS Lambda.
+
+🧱 Arquitetura
+
+O projeto utiliza Clean Architecture, separando responsabilidades em camadas claras:
+
+src
+├── domain
+│   ├── entities
+│   └── repositories
+├── application
+│   └── usecases
+├── infrastructure
+│   ├── db
+│   └── memory
+├── interfaces
+│   └── http
+└── tests
+
+Tecnologias utilizadas
+
+✅ Node.js
+
+✅ TypeScript
+
+✅ AWS Lambda
+
+✅ AWS API Gateway (HTTP API)
+
+✅ AWS DynamoDB
+
+✅ Serverless Framework
+
+✅ Jest (testes unitários)
+
+📋 Estrutura de dados
+
+Um funcionário possui os seguintes atributos:
+
+Campo	Tipo
+id	string
+name	string
+age	number
+role	string
+
+Exemplo:
+
+{
+  "id": "64bc1933-18d0-43bc-b591-48dcff583d4c",
+  "name": "Maria Souza",
+  "age": 29,
+  "role": "Dev Backend"
+}
+
+🌎 Endpoints em produção (AWS)
+
+Substitua o domínio abaixo pelo gerado no seu ambiente AWS:
+
+Base URL
+https://SEU_ID.execute-api.sa-east-1.amazonaws.com
+
+✅ Criar funcionário
+POST /clients
+
+
+Body (JSON):
+
+{
+  "name": "Maria Souza",
+  "age": 29,
+  "role": "Dev Backend"
+}
+
+✅ Listar funcionários
+GET /clients
+
+✅ Buscar funcionário por ID
+GET /clients/{id}
+
+✅ Atualizar funcionário
+PUT /clients/{id}
+
+
+Body:
+
+{
+  "name": "Maria Souza Atualizada",
+  "age": 30,
+  "role": "Tech Lead"
+}
+
+✅ Deletar funcionário
+DELETE /clients/{id}
+
+🧪 Testes unitários
+
+Testes realizados com Jest, focados na camada de caso de uso:
+
+npm test
+
+
+Ou em modo watch:
+
+npm run test:watch
+
+🚀 Deploy na AWS
+
+A infraestrutura é provisionada automaticamente via Serverless Framework.
+
+Comandos usados:
+
+npm run build
+npm run deploy
+
+
+Recursos criados automaticamentes:
+
+✅ AWS Lambda
+
+✅ DynamoDB
+
+✅ API Gateway (HTTP)
+
+✅ IAM Roles
+
+✅ CloudWatch Logs
+
+🛠️ Executar localmente
+npm install
+npm run build
+serverless offline
+
+
+A API local estará em:
+
+http://localhost:3000
+
+✅ Requisitos do desafio atendidos
+Requisito	Status
+Utilizar Clean Architecture	✅
+Versionado no Github	✅
+CRUD completo de funcionário	✅
+Persistência em banco na AWS	✅ DynamoDB
+Lambda com acesso público	✅
+Infra com Serverless Framework	✅
+Testes unitários (Jest)	✅
+👨‍💻 Autor
+
+Júlio César Vitor
+Desenvolvedor Full Stack Sênior
+Node.js | TypeScript | Angular | AWS | SQL | NoSQL
