@@ -1,0 +1,38 @@
+{
+  "name": "cadastro-cliente",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "packages": {},
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.137",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.19.1",
+    "@types/uuid": "^10.0.0",
+    "jest": "^29.7.0",
+    "serverless": "^4.0.0",
+    "serverless-offline": "^14.0.0",
+    "ts-jest": "^29.4.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "deploy": "serverless deploy",
+    "offline": "serverless offline",
+    "remove": "serverless remove",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.940.0",
+    "@aws-sdk/lib-dynamodb": "^3.940.0",
+    "uuid": "^8.3.2"
+  }
+}

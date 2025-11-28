@@ -1,0 +1,29 @@
+export const ok = (body: unknown) => ({
+  statusCode: 200,
+  body: JSON.stringify(body)
+});
+
+export const created = (body: unknown) => ({
+  statusCode: 201,
+  body: JSON.stringify(body)
+});
+
+export const noContent = () => ({
+  statusCode: 204,
+  body: ''
+});
+
+export const badRequest = (message: string) => ({
+  statusCode: 400,
+  body: JSON.stringify({ error: message })
+});
+
+export const notFound = (message: string) => ({
+  statusCode: 404,
+  body: JSON.stringify({ error: message })
+});
+
+export const serverError = (message: string) => ({
+  statusCode: 500,
+  body: JSON.stringify({ error: message })
+});

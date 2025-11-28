@@ -1,0 +1,74 @@
+service: cadastro-cliente
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: sa-east-1
+  stage: dev
+  environment:
+    CLIENT_TABLE: ${self:service}-clients-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:Scan
+      Resource:
+        - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CLIENT_TABLE}
+
+plugins:
+  - serverless-offline
+
+functions:
+  createClient:
+    handler: dist/interfaces/http/createClientHandler.handler
+    events:
+      - httpApi:
+          path: /clients
+          method: post
+
+  getClient:
+    handler: dist/interfaces/http/getClientHandler.handler
+    events:
+      - httpApi:
+          path: /clients/{id}
+          method: get
+
+  updateClient:
+    handler: dist/interfaces/http/updateClientHandler.handler
+    events:
+      - httpApi:
+          path: /clients/{id}
+          method: put
+
+  deleteClient:
+    handler: dist/interfaces/http/deleteClientHandler.handler
+    events:
+      - httpApi:
+          path: /clients/{id}
+          method: delete
+
+  listClients:
+    handler: dist/interfaces/http/listClientsHandler.handler
+    events:
+      - httpApi:
+          path: /clients
+          method: get
+
+resources:
+  Resources:
+    ClientTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.CLIENT_TABLE}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
