@@ -1,168 +1,152 @@
-📌 Cadastro de Funcionários – API Serverless com Clean Architecture
-📖 Descrição
+Cadastro de Clientes – API Serverless
 
-Este projeto consiste em uma API REST para cadastro de funcionários, desenvolvida em Node.js + TypeScript, utilizando os princípios da Clean Architecture e hospedada na AWS em infraestrutura Serverless.
+Este projeto foi desenvolvido como parte de um teste técnico, com o objetivo de criar um CRUD simples de clientes utilizando Node.js, TypeScript e serviços da AWS, aplicando conceitos de Clean Architecture e infraestrutura como código.
 
-A aplicação permite:
+A aplicação permite criar, consultar, atualizar e remover clientes, salvando os dados em um banco NoSQL (DynamoDB) dentro da AWS e disponibilizando as rotas através do API Gateway + Lambda.
 
-✅ Criar funcionário
+📌 Tecnologias utilizadas
 
-✅ Listar funcionários
+Node.js
 
-✅ Buscar funcionário por ID
+TypeScript
 
-✅ Atualizar funcionário
+AWS Lambda
 
-✅ Remover funcionário
+API Gateway
 
-Os dados são persistidos em DynamoDB, e a aplicação é exposta publicamente através de API Gateway + AWS Lambda.
+DynamoDB
 
-🧱 Arquitetura
+Serverless Framework
 
-O projeto utiliza Clean Architecture, separando responsabilidades em camadas claras:
+Jest (testes unitários)
 
-src
-├── domain
-│   ├── entities
-│   └── repositories
-├── application
-│   └── usecases
-├── infrastructure
-│   ├── db
-│   └── memory
-├── interfaces
-│   └── http
-└── tests
+📁 Estrutura do projeto
 
-Tecnologias utilizadas
+O projeto foi organizado seguindo princípios da Clean Architecture:
 
-✅ Node.js
-
-✅ TypeScript
-
-✅ AWS Lambda
-
-✅ AWS API Gateway (HTTP API)
-
-✅ AWS DynamoDB
-
-✅ Serverless Framework
-
-✅ Jest (testes unitários)
-
-📋 Estrutura de dados
-
-Um funcionário possui os seguintes atributos:
-
-Campo	Tipo
-id	string
-name	string
-age	number
-role	string
-
-Exemplo:
-
-{
-  "id": "64bc1933-18d0-43bc-b591-48dcff583d4c",
-  "name": "Maria Souza",
-  "age": 29,
-  "role": "Dev Backend"
-}
-
-🌎 Endpoints em produção (AWS)
-
-Substitua o domínio abaixo pelo gerado no seu ambiente AWS:
-
-Base URL
-https://SEU_ID.execute-api.sa-east-1.amazonaws.com
-
-✅ Criar funcionário
-POST /clients
+src/
+ ├── domain
+ │   ├── entities
+ │   ├── repositories
+ │   └── application
+ │       └── usecases
+ ├── infrastructure
+ │   └── db
+ ├── interfaces
+ │   └── http
+ └── ...
 
 
-Body (JSON):
+Domain: Entidades e regras de negócio
 
-{
-  "name": "Maria Souza",
-  "age": 29,
-  "role": "Dev Backend"
-}
+Application / Usecases: Casos de uso
 
-✅ Listar funcionários
-GET /clients
+Infrastructure: Integração com DynamoDB
 
-✅ Buscar funcionário por ID
-GET /clients/{id}
+Interfaces / Http: Handlers das rotas (Lambda)
 
-✅ Atualizar funcionário
-PUT /clients/{id}
+🧾 Estrutura do Cliente
 
+Um cliente possui os seguintes atributos:
 
-Body:
+Campo	Tipo	Descrição
+id	string	Identificador único (UUID)
+name	string	Nome do cliente
+age	number	Idade do cliente
+role	string	Cargo/Função
+🌐 API em produção
 
-{
-  "name": "Maria Souza Atualizada",
-  "age": 30,
-  "role": "Tech Lead"
-}
+A aplicação já está preparada para ser acessada via API Gateway.
 
-✅ Deletar funcionário
-DELETE /clients/{id}
+Substitua SEU_ID pelo ID exibido no seu API Gateway
+
+https://SEU_ID.execute-api.sa-east-1.amazonaws.com/dev
+
+Endpoints disponíveis
+Método	Rota	Descrição
+GET	/clients	Lista todos os clientes
+GET	/clients/{id}	Busca um cliente por ID
+POST	/clients	Cria um novo cliente
+PUT	/clients/{id}	Atualiza um cliente
+DELETE	/clients/{id}	Remove um cliente
+🔁 Exemplos de requisição
+Criar um cliente
+curl -X POST https://SEU_ID.execute-api.sa-east-1.amazonaws.com/dev/clients \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Maria Silva",
+    "age": 29,
+    "role": "Analista"
+  }'
+
+Listar todos os clientes
+curl https://SEU_ID.execute-api.sa-east-1.amazonaws.com/dev/clients
+
+Buscar cliente por ID
+curl https://SEU_ID.execute-api.sa-east-1.amazonaws.com/dev/clients/{id}
+
+Atualizar cliente
+curl -X PUT https://SEU_ID.execute-api.sa-east-1.amazonaws.com/dev/clients/{id} \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Maria Oliveira",
+    "age": 30,
+    "role": "Tech Lead"
+  }'
+
+Deletar cliente
+curl -X DELETE https://SEU_ID.execute-api.sa-east-1.amazonaws.com/dev/clients/{id}
 
 🧪 Testes unitários
 
-Testes realizados com Jest, focados na camada de caso de uso:
+Os testes foram implementados com Jest para validar os principais casos de uso.
 
+Para rodar os testes localmente:
+
+npm install
 npm test
 
+🚀 Deploy
 
-Ou em modo watch:
+O deploy da aplicação foi feito utilizando o Serverless Framework.
 
-npm run test:watch
+Para realizar o deploy em uma conta AWS:
 
-🚀 Deploy na AWS
+Configure suas credenciais:
 
-A infraestrutura é provisionada automaticamente via Serverless Framework.
+aws configure
 
-Comandos usados:
+
+Faça o build:
 
 npm run build
+
+
+Faça o deploy:
+
 npm run deploy
 
 
-Recursos criados automaticamentes:
+A tabela do DynamoDB também é criada automaticamente via Serverless.
 
-✅ AWS Lambda
+✅ Diferenciais
 
-✅ DynamoDB
+Arquitetura baseada em Clean Architecture
 
-✅ API Gateway (HTTP)
+Separação clara de responsabilidade (DDD + Use Cases)
 
-✅ IAM Roles
+TypeScript 100%
 
-✅ CloudWatch Logs
+Infraestrutura como código
 
-🛠️ Executar localmente
-npm install
-npm run build
-serverless offline
+Testes unitários automatizados
 
+Padrão RESTful
 
-A API local estará em:
+Código organizado para escalabilidade
 
-http://localhost:3000
-
-✅ Requisitos do desafio atendidos
-Requisito	Status
-Utilizar Clean Architecture	✅
-Versionado no Github	✅
-CRUD completo de funcionário	✅
-Persistência em banco na AWS	✅ DynamoDB
-Lambda com acesso público	✅
-Infra com Serverless Framework	✅
-Testes unitários (Jest)	✅
 👨‍💻 Autor
 
 Júlio César Vitor
-Desenvolvedor Full Stack Sênior
-Node.js | TypeScript | Angular | AWS | SQL | NoSQL
+Desenvolvedor Full Stack
+Node.js • TypeScript • Angular • AWS • SQL • NoSQL
